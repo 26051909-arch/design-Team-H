@@ -103,7 +103,11 @@ void Init(void)
 
 
 	//汲田
+	// ① 画像リソースの読み込み ("MapTip" という名前で登録)
+	ADD_RESOURCE("MapTip", CImage::CreateImage("Image/Field/new-Tiles/YukaTile.png"));
 
+	// ② フィールド（マップ）の生成
+	new Field();
 
 
 
