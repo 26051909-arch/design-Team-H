@@ -101,5 +101,8 @@ public:
 	//ƒQƒbƒg”¯
 	int m_hear_count;
 
+	//‰ß‹Ž‚ÌˆÊ’u
+	CVector2D m_pos_old;
+
 	static TexAnimData _anim_data[];
 };
