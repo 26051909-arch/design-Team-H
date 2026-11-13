@@ -6,6 +6,7 @@ enum {
     eType_AreaChange,
     eType_Player,
     eType_Enemy,
+    eType_Ghost,
     eType_Goal,
     eType_Player_Attack,
     eType_Enemy_Attack,
