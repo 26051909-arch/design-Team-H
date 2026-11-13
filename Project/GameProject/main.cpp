@@ -1,5 +1,6 @@
 #include "Base/Base.h"
 #include"Game/Player.h"
+#include"Game/Ghost.h"
 #include"Game/Field.h"
 
 void MainLoop(void) {

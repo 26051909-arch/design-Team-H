@@ -339,7 +339,7 @@ void Player::Update()
     m_pos_old = m_pos;
     //ダメージアニメーション確認用
     // 1秒につき5ずつ体力を減らす（60FPSの場合）
-    if (m_state != eState_Death)
+    /*if (m_state != eState_Death)
     {
         m_hp = max(m_hp - 5.0f / 60.0f, 0.0f);
 
@@ -347,7 +347,7 @@ void Player::Update()
         {
             m_state = eState_Death;
         }
-    }
+    }*/
 
     m_pos_old = m_pos;
 

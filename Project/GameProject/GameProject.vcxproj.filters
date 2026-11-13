@@ -14,6 +14,9 @@
     <ClInclude Include="Game\PlayerFinger.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Ghost.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -27,6 +30,9 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\PlayerFinger.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Ghost.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
