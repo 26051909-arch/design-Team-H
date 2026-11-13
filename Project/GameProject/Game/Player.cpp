@@ -1,4 +1,5 @@
 #include"Player.h"
+#include"Field.h"
 
 
 
@@ -261,12 +262,36 @@ void Player::StateDamage()
 void Player::StateDown()
 {
 
+    int anim = -1;
+
+    //向きに応じた死亡アニメーション
+    switch (m_direction)
+    {
+    case eDirection_Mae:
+        anim = eAnimDeathMae;
+        break;
+
+    case eDirection_Ushiro:
+        anim = eAnimDeathUshiro;
+        break;
+
+    case eDirection_Left:
+    case eDirection_Right:
+        anim = eAnimDeathYoko;
+        break;
+    }
+
+    //アニメーション終了確認
+    if (m_img.CheckAnimationEnd()) {
+        SetKill();
+    }
 }
 
 
 
 void Player::Update()
 {
+    m_pos_old = m_pos;
 
     switch (m_state)
     {
@@ -314,13 +339,30 @@ void Player::Draw()
 
 void Player::Collision(Base* b)
 {
-
+    switch (b->m_type) {
+    case eType_Map:
+        if (Field* m = dynamic_cast<Field*>(b)) {
+            int t = m->CollisionPoint(m_pos);
+            if (t != 0) {
+                m_pos = m_pos_old;
+            }
+        }
+        break;
+    }
 }
 
 
 
-void TakeDamage(int damage)
+void Player::TakeDamage(int damage)
 {
+    //HP減少
+    m_hp = max(m_hp - damage, 0);
+    if (m_hp <= 0) {
+        m_state = eState_Death;
+    }
+    else {
+        m_state = eState_Damage;
+    }
 
 }
 
@@ -342,21 +384,21 @@ void Player::SetPlayerAnimation(int anim)
 
 
 static TexAnim _idleMae[] = {
-    {0,3},
-    {1,3},
-    {2,3},
+    {0,5},
+    {1,5},
+    {2,5},
 };
 
 static TexAnim _idleUshiro[] = {
-    {6,3},
-    {7,3},
-    {8,3},
+    {6,5},
+    {7,5},
+    {8,5},
 };
 
 static TexAnim _idleYoko[] = {
-    {12,3},
-    {13,3},
-    {14,3},
+    {12,5},
+    {13,5},
+    {14,5},
 };
 
 static TexAnim _warkMae[] = {
