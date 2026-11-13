@@ -2,14 +2,14 @@
 
 // 迷路のマップデータ（0:床[通り抜けOK], 1:支柱, 2~:壁[通れない]）
 static int mazeData[MAP_HEIGHT][MAP_WIDTH] = {
-    {2,4,4,4,4,4,4,4,4,4,4,4,4,4,2},
+    {2,4,4,4,4,4,4,4,7,4,4,4,4,4,2},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {10,1,1,1,1,1,1,1,1,1,1,1,1,1,9},
     {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
     {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
     {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
-    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
-    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
-    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
-    {2,3,3,3,3,3,3,3,3,3,3,3,3,3,2},
+    {2,3,3,3,3,3,8,3,3,3,3,3,3,3,2},
 };
 
 // コンストラクタ：エンジンのBaseへ登録し、画像をセット
@@ -30,22 +30,33 @@ void Field::Draw() {
         for (int j = 0; j < MAP_WIDTH; j++) {
             int t = stage[i][j];
 
-            // 32px刻みで画像から指定のタイルを切り抜いて描画
-            if (t >= 6) {
-                // 2行目の1番目（横0px, 縦32px ～ 横32px, 縦64px）
-                m_mapTip.SetRect(0, 32, 32, 64);
+            switch (t) {
+                // --- 1行目のタイル (Y: 0 ～ 32) ---
+            case 0:  m_mapTip.SetRect(0, 0, 32, 32); break; // 床
+            case 1:  m_mapTip.SetRect(32, 0, 64, 32); break; // 支柱
+            case 2:  m_mapTip.SetRect(64, 0, 96, 32); break; // 壁（上）
+            case 3:  m_mapTip.SetRect(96, 0, 128, 32); break; // 壁（下）
+            case 4:  m_mapTip.SetRect(128, 0, 160, 32); break; // 壁（右）
+            case 5:  m_mapTip.SetRect(160, 0, 192, 32); break; // 壁（左）
+
+                // --- 2行目のタイル (Y: 32 ～ 64) ---
+            case 6:  m_mapTip.SetRect(0, 32, 32, 64); break; // 左壁
+            case 7:  m_mapTip.SetRect(32, 32, 64, 64); break; // 上扉
+            case 8:  m_mapTip.SetRect(64, 32, 96, 64); break; // 下扉
+            case 9:  m_mapTip.SetRect(96, 32, 128, 64); break; // 右扉
+            case 10: m_mapTip.SetRect(128, 32, 160, 64); break; // 左扉
+
+            default:
+                m_mapTip.SetRect(0, 0, 32, 32); break;
             }
-            else {
-                // 1行目の素材（従来通り横に32pxずつズラす）
-                m_mapTip.SetRect(32 * t, 0, 32 * t + 32, 32);
-            }
+
             m_mapTip.SetSize(MAP_TIP_SIZE, MAP_TIP_SIZE);
             m_mapTip.SetPos(MAP_TIP_SIZE * j - m_scroll.x, MAP_TIP_SIZE * i - m_scroll.y);
-
             m_mapTip.Draw();
         }
     }
 }
+
 
 // 指定座標のタイル判定（0:床は通り抜けOK、0以外:壁や支柱で通れない）
 int Field::CollisionPoint(const CVector2D& pos) {
