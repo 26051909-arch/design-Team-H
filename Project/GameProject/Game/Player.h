@@ -85,7 +85,7 @@ public:
 
 
 	//ƒ_ƒ[ƒWˆ—
-	void TakeDamage(int damage);
+	void TakeDamage(float damage);
 
 	float GetHP() {
 		return m_hp;

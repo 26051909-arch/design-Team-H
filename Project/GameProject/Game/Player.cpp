@@ -256,6 +256,39 @@ void Player::StateGard()
 void Player::StateDamage()
 {
 
+    int anim = -1;
+
+    //向きに応じたダメージアニメーション
+    switch (m_direction)
+    {
+    case eDirection_Mae:
+        anim = eAnimDamageMae;
+        break;
+
+    case eDirection_Ushiro:
+        anim = eAnimDamageUshiro;
+        break;
+
+    case eDirection_Left:
+    case eDirection_Right:
+        anim = eAnimDamageYoko;
+        break;
+    }
+
+
+    //攻撃アニメーションの開始
+    if (m_anim != anim && anim != -1)
+    {
+        m_anim = anim;
+        m_img.ChangeAnimation(anim, false);
+    }
+
+    //アニメーションが終了したら通常状態へ
+    if (m_img.CheckAnimationEnd())
+    {
+        m_state = eState_Idle;
+    }
+
 }
 
 
@@ -281,6 +314,15 @@ void Player::StateDown()
         break;
     }
 
+
+    //死亡アニメーションの開始
+    if (m_anim != anim && anim != -1)
+    {
+        m_anim = anim;
+        m_img.ChangeAnimation(anim, false);
+    }
+
+
     //アニメーション終了確認
     if (m_img.CheckAnimationEnd()) {
         SetKill();
@@ -291,6 +333,18 @@ void Player::StateDown()
 
 void Player::Update()
 {
+    //ダメージアニメーション確認用
+    // 1秒につき5ずつ体力を減らす（60FPSの場合）
+    if (m_state != eState_Death)
+    {
+        m_hp = max(m_hp - 5.0f / 60.0f, 0.0f);
+
+        if (m_hp <= 0)
+        {
+            m_state = eState_Death;
+        }
+    }
+
     m_pos_old = m_pos;
 
     switch (m_state)
@@ -353,7 +407,7 @@ void Player::Collision(Base* b)
 
 
 
-void Player::TakeDamage(int damage)
+void Player::TakeDamage(float damage)
 {
     //HP減少
     m_hp = max(m_hp - damage, 0);
@@ -519,30 +573,30 @@ static TexAnim _damageYoko[] = {
 };
 
 static TexAnim _deathMae[] = {
-    {90,3},
-    {91,3},
-    {92,3},
-    {93,3},
-    {94,3},
-    {95,3},
+    {90,6},
+    {91,6},
+    {92,6},
+    {93,6},
+    {94,6},
+    {95,6},
 };
 
 static TexAnim _deathUshiro[] = {
-    {96,3},
-    {97,3},
-    {98,3},
-    {99,3},
-    {100,3},
-    {101,3},
+    {96,6},
+    {97,6},
+    {98,6},
+    {99,6},
+    {100,6},
+    {101,6},
 };
 
 static TexAnim _deathYoko[] = {
-    {102,3},
-    {103,3},
-    {104,3},
-    {105,3},
-    {106,3},
-    {107,3},
+    {102,6},
+    {103,6},
+    {104,6},
+    {105,6},
+    {106,6},
+    {107,6},
 };
 
 
