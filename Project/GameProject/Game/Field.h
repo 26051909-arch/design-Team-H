@@ -1,10 +1,10 @@
 #pragma once
 #include "Base/Base.h"
 
-// マップのサイズ設定（横20マス、縦15マス、1マス32px）
-#define MAP_WIDTH    20
-#define MAP_HEIGHT   15
-#define MAP_TIP_SIZE 32
+// マップのサイズ設定（横15マス、縦8マス、1マス128px）
+#define MAP_WIDTH    15
+#define MAP_HEIGHT   8
+#define MAP_TIP_SIZE 128
 
 class Field : public Base {
 private:
