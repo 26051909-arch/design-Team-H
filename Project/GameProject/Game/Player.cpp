@@ -6,6 +6,9 @@
 
 Player::Player(const CVector2D& pos, int direction) : Base(eType_Player)
 {
+    m_pos_old = m_pos;
+    m_is_ground = true;
+    m_rect = CRect(-16, -32, 16, 0);
     m_img = COPY_RESOURCE("Player", CImage);
     //座標設定
     m_pos_old = m_pos = pos;
@@ -333,6 +336,7 @@ void Player::StateDown()
 
 void Player::Update()
 {
+    m_pos_old = m_pos;
     //ダメージアニメーション確認用
     // 1秒につき5ずつ体力を減らす（60FPSの場合）
     if (m_state != eState_Death)
@@ -394,17 +398,27 @@ void Player::Draw()
 void Player::Collision(Base* b)
 {
     switch (b->m_type) {
-    case eType_Map:
+    case eType_Map: // フィールド（マップ）との当たり判定
         if (Field* m = dynamic_cast<Field*>(b)) {
-            int t = m->CollisionPoint(m_pos);
+            int t;
+
+            // ① 横（X軸）の当たり判定：壁にぶつかったら横座標だけ元に戻す
+            t = m->CollisionRect(CVector2D(m_pos.x, m_pos_old.y), m_rect);
             if (t != 0) {
-                m_pos = m_pos_old;
+                m_pos.x = m_pos_old.x;
+            }
+
+            // ② 縦（Y軸）の当たり判定：床や天井にぶつかったら縦座標だけ元に戻す
+            t = m->CollisionRect(CVector2D(m_pos_old.x, m_pos.y), m_rect);
+            if (t != 0) {
+                m_pos.y = m_pos_old.y;
+                m_vec.y = 0;          // 落下速度をストップ
+                m_is_ground = true;   // 着地フラグをON
             }
         }
         break;
     }
 }
-
 
 
 void Player::TakeDamage(float damage)

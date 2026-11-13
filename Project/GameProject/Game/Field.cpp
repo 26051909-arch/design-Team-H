@@ -58,7 +58,6 @@ void Field::Draw() {
 }
 
 
-// 指定座標のタイル判定（0:床は通り抜けOK、0以外:壁や支柱で通れない）
 int Field::CollisionPoint(const CVector2D& pos) {
     int col = (int)(pos.x / MAP_TIP_SIZE);
     if (col < 0) col = 0;
@@ -70,13 +69,14 @@ int Field::CollisionPoint(const CVector2D& pos) {
 
     int t = stage[row][col];
 
-    // 0(床) 以外は全て「壁/支柱」として当たり判定を返す
-    if (t != 0) {
-        return t;
+    // 1 (床) のときは「当たり判定なし(0)」＝通り抜けOK
+    if (t == 1) {
+        return 0;
     }
-    return 0; // 床はすり抜けOK
-}
 
+    // 1 (床) 以外（0や壁）はすべて「壁に当たった(1)」として判定！
+    return 1;
+}
 // 矩形（キャラクターの四隅）での当たり判定
 int Field::CollisionRect(const CVector2D& pos, const CRect& rect) {
     CRect r = CRect(

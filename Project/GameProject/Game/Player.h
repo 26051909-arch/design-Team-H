@@ -61,7 +61,7 @@ private:
 	float m_hp;
 
 	CImage m_img;
-
+	bool m_is_ground;
 
 public:
 
