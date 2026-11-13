@@ -8,7 +8,7 @@ Player::Player(const CVector2D& pos, int direction) : Base(eType_Player)
 {
     m_pos_old = m_pos;
     m_is_ground = true;
-    m_rect = CRect(-16, -32, 16, 0);
+    m_rect = CRect(-32, -108, 32, 0);
     m_img = COPY_RESOURCE("Player", CImage);
     //座標設定
     m_pos_old = m_pos = pos;
@@ -390,6 +390,8 @@ void Player::Draw()
     m_img.SetFlipH(m_flip);
 
     m_img.Draw();
+
+    DrawRect();
 }
 
 
@@ -397,8 +399,9 @@ void Player::Draw()
 
 void Player::Collision(Base* b)
 {
+
     switch (b->m_type) {
-    case eType_Map: // フィールド（マップ）との当たり判定
+    case eType_Field: // フィールド（マップ）との当たり判定
         if (Field* m = dynamic_cast<Field*>(b)) {
             int t;
 
