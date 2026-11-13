@@ -91,7 +91,7 @@ void Init(void)
 	//-----------------------------------------------------
 	
 	//èºâ∫
-	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/HitoSprite.png", Player::_anim_data, 128, 128));
+	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/HitoSprite(2).png", Player::_anim_data, 128, 128));
 
 
 

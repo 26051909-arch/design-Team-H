@@ -53,7 +53,7 @@ void Player::StateIdle()
 {
     //ï‡Ç´ÅEëñÇËÇÃà⁄ìÆë¨ìx
     const float walk_speed = 4.0f;
-    const float run_speed = 8.0f;
+    const float run_speed = 7.0f;
 
 
     //ShiftÇâüÇµÇƒÇ¢ÇÈä‘ÇÕëñÇÈ
@@ -360,45 +360,45 @@ static TexAnim _idleYoko[] = {
 };
 
 static TexAnim _warkMae[] = {
+    {18,6},
+    {19,6},
+    {20,6},
+    {21,6},
+};
+
+static TexAnim _runMae[] = {
     {18,4},
     {19,4},
     {20,4},
     {21,4},
 };
 
-static TexAnim _runMae[] = {
-    {18,2},
-    {19,2},
-    {20,2},
-    {21,2},
+static TexAnim _warkUshiro[] = {
+    {24,6},
+    {25,6},
+    {26,6},
+    {27,6},
 };
 
-static TexAnim _warkUshiro[] = {
+static TexAnim _runUshiro[] = {
     {24,4},
     {25,4},
     {26,4},
     {27,4},
 };
 
-static TexAnim _runUshiro[] = {
-    {24,2},
-    {25,2},
-    {26,2},
-    {27,2},
+static TexAnim _warkYoko[] = {
+    {30,6},
+    {31,6},
+    {32,6},
+    {33,6},
 };
 
-static TexAnim _warkYoko[] = {
+static TexAnim _runYoko[] = {
     {30,4},
     {31,4},
     {32,4},
     {33,4},
-};
-
-static TexAnim _runYoko[] = {
-    {30,2},
-    {31,2},
-    {32,2},
-    {33,2},
 };
 
 static TexAnim _attackMae[] = {
@@ -429,27 +429,27 @@ static TexAnim _attackYoko[] = {
 };
 
 static TexAnim _gardMae[] = {
-    {54,3},
-    {55,3},
+   // {54,3},
+   // {55,3},
     {56,3},
-    {57,3},
-    {58,3},
+   // {57,3},
+   // {58,3},
 };
 
 static TexAnim _gardUshiro[] = {
-    {60,3},
-    {61,3},
+    //{60,3},
+    //{61,3},
     {62,3},
-    {63,3},
-    {64,3},
+    //{63,3},
+    //{64,3},
 };
 
 static TexAnim _gardYoko[] = {
-    {66,3},
-    {67,3},
+    //{66,3},
+    //{67,3},
     {68,3},
-    {69,3},
-    {70,3},
+    //{69,3},
+    //{70,3},
 };
 
 static TexAnim _damageMae[] = {
