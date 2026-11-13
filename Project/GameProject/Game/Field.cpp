@@ -32,13 +32,13 @@ void Field::Draw() {
 
             switch (t) {
                 // --- 1行目のタイル (Y: 0 ～ 32) ---
-            case 0:  m_mapTip.SetRect(0, 0, 32, 32); break; // 床
+            case 0:  m_mapTip.SetRect(32, 0, 32, 32); break; // 床
             case 1:  m_mapTip.SetRect(32, 0, 64, 32); break; // 支柱
             case 2:  m_mapTip.SetRect(64, 0, 96, 32); break; // 壁（上）
             case 3:  m_mapTip.SetRect(96, 0, 128, 32); break; // 壁（下）
             case 4:  m_mapTip.SetRect(128, 0, 160, 32); break; // 壁（右）
             case 5:  m_mapTip.SetRect(160, 0, 192, 32); break; // 壁（左）
-
+                
                 // --- 2行目のタイル (Y: 32 ～ 64) ---
             case 6:  m_mapTip.SetRect(0, 32, 32, 64); break; // 左壁
             case 7:  m_mapTip.SetRect(32, 32, 64, 64); break; // 上扉
