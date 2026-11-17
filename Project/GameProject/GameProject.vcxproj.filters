@@ -17,9 +17,6 @@
     <ClInclude Include="Game\Ghost.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="mapChange.h">
-      <Filter>Game</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -36,9 +33,6 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Ghost.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="mapChange.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
