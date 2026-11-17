@@ -402,60 +402,69 @@ void Player::Collision(Base* b) {
     case eType_Field:
         if (Field* f = dynamic_cast<Field*>(b)) {
 
-            // --- ★ ここからマップ移動処理 ---
-            int tip = f->GetTip(m_pos + CVector2D(0, -64));
+            // 足元から体の中央あたりのマップ数字を取得
+            int tip = f->GetTip(m_pos + CVector2D(0, -32));
 
-            // 【ステージ1(7) -> ステージ2へ】
+            // ==========================================
+            // ステージ1 (7:上ドア)
+            // ==========================================
             if (tip == 7 && g_currentStage == 1) {
                 g_currentStage = 2;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE);
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE); // ステージ2の下ドア前へ
                 m_pos_old = m_pos;
             }
-            // 【ステージ2(8) -> ステージ1へ戻る】
+
+            // ==========================================
+            // ステージ2 (8:下ドア / 7:上ドア)
+            // ==========================================
             else if (tip == 8 && g_currentStage == 2) {
                 g_currentStage = 1;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2.5 * MAP_TIP_SIZE);
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2.5 * MAP_TIP_SIZE); // ステージ1の上ドア前へ
                 m_pos_old = m_pos;
             }
-
-            // 【ステージ2(7) -> ステージ3へ】
             else if (tip == 7 && g_currentStage == 2) {
                 g_currentStage = 3;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE);
-                m_pos_old = m_pos;
-            }
-            // 【ステージ3(8) -> ステージ2へ戻る】
-            else if (tip == 8 && g_currentStage == 3) {
-                g_currentStage = 2;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2.5 * MAP_TIP_SIZE);
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE); // ステージ3の下ドア前へ
                 m_pos_old = m_pos;
             }
 
-            // 【ステージ3(7) -> ステージ4へ】★ 3の上のドアは7！
-            else if (tip == 7 && g_currentStage == 3) {
-                g_currentStage = 4;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE); // ステージ4の下の通路に着地
+            // ==========================================
+            // ステージ3 (8:下ドア / 10:左ドア)
+            // ==========================================
+            else if (tip == 8 && g_currentStage == 3) {
+                g_currentStage = 2;
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2.5 * MAP_TIP_SIZE); // ステージ2の上ドア前へ
                 m_pos_old = m_pos;
             }
-            // 【ステージ4の左扉(9)に入る】 -> ステージ3へ戻る
-            else if (tip == 9 && g_currentStage == 4) {
+            else if (tip == 10 && g_currentStage == 3) { //  左ドア(10)を踏んだらステージ4へ
+                g_currentStage = 4;
+                m_pos = CVector2D(13 * MAP_TIP_SIZE, 2.92 * MAP_TIP_SIZE); // ステージ4の右端(行2)に着地
+                m_pos_old = m_pos;
+            }
+
+            // ==========================================
+            // ステージ4 (9:右ドア / 10:左ドア)
+            // ==========================================
+            else if (tip == 9 && g_currentStage == 4) { //  右ドア(9)を踏んだらステージ3へ戻る
                 g_currentStage = 3;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2.5 * MAP_TIP_SIZE); // ステージ3のドア前へ
+                m_pos = CVector2D(1.5 * MAP_TIP_SIZE, 2.92 * MAP_TIP_SIZE); // ステージ3の左ドア(行2)の前へ
                 m_pos_old = m_pos;
             }
-            // 【ステージ4の右扉(10)に入る】 -> ステージ5へ進む
-            else if (tip == 10 && g_currentStage == 4) {
+            else if (tip == 8 && g_currentStage == 4) { //  左ドア(10)を踏んだらステージ5へ
                 g_currentStage = 5;
-                m_pos = CVector2D(1.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE); // ステージ5の左側へ
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2 * MAP_TIP_SIZE); // ステージ5へ
                 m_pos_old = m_pos;
             }
-            // 【ステージ5(10:左ドア) -> ステージ4へ戻る】
-            else if (tip == 9 && g_currentStage == 5) {
+
+            // ==========================================
+            // ステージ5 (7:左ドアから戻る場合など)
+            // ==========================================
+            else if (tip == 7 && g_currentStage == 5) {
                 g_currentStage = 4;
-                m_pos = CVector2D(13 * MAP_TIP_SIZE, 2 * MAP_TIP_SIZE); // ステージ4の右ドア(9)の前へ
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 7 * MAP_TIP_SIZE); // ステージ4の左ドア前へ
                 m_pos_old = m_pos;
             }
-            // --- ★ ここまで ---
+            // ---  ここまで ---
 
             // (以下は既存の壁押し戻し処理)
             int t;
