@@ -96,8 +96,8 @@ void Init(void)
 
 
 
-	new Player(CVector2D(300, 400), Player::eDirection_Ushiro);
-
+	
+	new Player(CVector2D(2 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE), Player::eDirection_Ushiro);
 
 
 
@@ -111,7 +111,7 @@ void Init(void)
 	// ① 画像リソースの読み込み ("MapTip" という名前で登録)
 	ADD_RESOURCE("MapTip", CImage::CreateImage("Image/Field/new-Tiles/YukaTile.png"));
 
-	// ② フィールド（マップ）の生成
+	// ② フィールドの生成（これが ① より下に書かれているかチェック！）
 	new Field();
 
 

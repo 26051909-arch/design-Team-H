@@ -1,5 +1,5 @@
-#include"Player.h"
-#include"Field.h"
+#include "Player.h"
+#include "Field.h"
 
 
 
@@ -397,26 +397,78 @@ void Player::Draw()
 
 
 
-void Player::Collision(Base* b)
-{
-
+void Player::Collision(Base* b) {
     switch (b->m_type) {
-    case eType_Field: // フィールド（マップ）との当たり判定
-        if (Field* m = dynamic_cast<Field*>(b)) {
-            int t;
+    case eType_Field:
+        if (Field* f = dynamic_cast<Field*>(b)) {
 
-            // ① 横（X軸）の当たり判定：壁にぶつかったら横座標だけ元に戻す
-            t = m->CollisionRect(CVector2D(m_pos.x, m_pos_old.y), m_rect);
-            if (t != 0) {
-                m_pos.x = m_pos_old.x;
+            // --- ★ ここからマップ移動処理 ---
+            int tip = f->GetTip(m_pos + CVector2D(0, -64));
+
+            // 【ステージ1(7) -> ステージ2へ】
+            if (tip == 7 && g_currentStage == 1) {
+                g_currentStage = 2;
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE);
+                m_pos_old = m_pos;
+            }
+            // 【ステージ2(8) -> ステージ1へ戻る】
+            else if (tip == 8 && g_currentStage == 2) {
+                g_currentStage = 1;
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2.5 * MAP_TIP_SIZE);
+                m_pos_old = m_pos;
             }
 
-            // ② 縦（Y軸）の当たり判定：床や天井にぶつかったら縦座標だけ元に戻す
-            t = m->CollisionRect(CVector2D(m_pos_old.x, m_pos.y), m_rect);
+            // 【ステージ2(7) -> ステージ3へ】
+            else if (tip == 7 && g_currentStage == 2) {
+                g_currentStage = 3;
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE);
+                m_pos_old = m_pos;
+            }
+            // 【ステージ3(8) -> ステージ2へ戻る】
+            else if (tip == 8 && g_currentStage == 3) {
+                g_currentStage = 2;
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2.5 * MAP_TIP_SIZE);
+                m_pos_old = m_pos;
+            }
+
+            // 【ステージ3(7) -> ステージ4へ】★ 3の上のドアは7！
+            else if (tip == 7 && g_currentStage == 3) {
+                g_currentStage = 4;
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE); // ステージ4の下の通路に着地
+                m_pos_old = m_pos;
+            }
+            // 【ステージ4の左扉(9)に入る】 -> ステージ3へ戻る
+            else if (tip == 9 && g_currentStage == 4) {
+                g_currentStage = 3;
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2.5 * MAP_TIP_SIZE); // ステージ3のドア前へ
+                m_pos_old = m_pos;
+            }
+            // 【ステージ4の右扉(10)に入る】 -> ステージ5へ進む
+            else if (tip == 10 && g_currentStage == 4) {
+                g_currentStage = 5;
+                m_pos = CVector2D(1.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE); // ステージ5の左側へ
+                m_pos_old = m_pos;
+            }
+            // 【ステージ5(10:左ドア) -> ステージ4へ戻る】
+            else if (tip == 9 && g_currentStage == 5) {
+                g_currentStage = 4;
+                m_pos = CVector2D(13 * MAP_TIP_SIZE, 2 * MAP_TIP_SIZE); // ステージ4の右ドア(9)の前へ
+                m_pos_old = m_pos;
+            }
+            // --- ★ ここまで ---
+
+            // (以下は既存の壁押し戻し処理)
+            int t;
+            // X軸（横壁）
+            t = f->CollisionRect(CVector2D(m_pos.x, m_pos_old.y), m_rect);
+            if (t != 0) m_pos.x = m_pos_old.x;
+
+            // Y軸（床・天井）
+            t = f->CollisionRect(CVector2D(m_pos_old.x, m_pos.y), m_rect);
             if (t != 0) {
                 m_pos.y = m_pos_old.y;
-                m_vec.y = 0;          // 落下速度をストップ
-                m_is_ground = true;   // 着地フラグをON
+                m_vec.y = 0;
+                m_is_ground = true;
             }
         }
         break;

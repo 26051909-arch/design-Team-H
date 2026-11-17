@@ -1,64 +1,63 @@
 #include "Field.h"
 
-// 迷路のマップデータ（0:床[通り抜けOK], 1:支柱, 2~:壁[通れない]）
-static int mazeData[MAP_HEIGHT][MAP_WIDTH] = {
-    {2,4,4,4,4,4,4,4,7,4,4,4,4,4,2},
-    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
-    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
-    {10,1,1,1,1,1,1,1,1,1,1,1,1,1,9},
+// 迷路のマップデータ（0:空, 1:床, 2~6:壁, 7~8:移動口）
+static int mazeData1[MAP_HEIGHT][MAP_WIDTH] = {
+    {2,4,4,4,4,4,4,7,4,4,4,4,4,4,2},
     {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
     {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
     {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
-    {2,3,3,3,3,3,8,3,3,3,3,3,3,3,2},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {2,3,3,3,3,3,3,3,3,3,3,3,3,3,2},
 };
 
-// コンストラクタ：エンジンのBaseへ登録し、画像をセット
+static int mazeData2[MAP_HEIGHT][MAP_WIDTH] = {
+    {2,2,2,2,2,4,4,7,4,4,2,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,2,3,3,8,3,3,2,2,2,2,2},
+};
+
+static int mazeData3[MAP_HEIGHT][MAP_WIDTH] = {
+    {2,4,4,4,4,4,4,4,4,4,2,2,2,2,2},
+    {5,1,1,1,1,1,1,1,1,1,6,2,2,2,2},
+    {10,1,1,1,1,1,1,1,1,1,6,2,2,2,2},
+    {2,3,3,3,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,2,3,3,8,3,3,2,2,2,2,2},
+};
+
+static int mazeData4[MAP_HEIGHT][MAP_WIDTH] = {
+    {2,2,2,2,2,4,4,4,4,4,2,2,2,2,2},
+    {2,1,1,1,1,1,1,1,1,1,1,1,1,1,2},
+    {10,1,1,1,1,1,1,1,1,1,1,1,1,1,9},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,5,1,1,1,1,1,6,2,2,2,2},
+    {2,2,2,2,2,3,3,3,3,3,2,2,2,2,2},
+};
+
+int g_currentStage = 1;
+
+// コンストラクタ
 Field::Field() : Base(eType_Field) {
-    // main.cppのInitで登録した "MapTip" 画像を取得
-    m_mapTip = COPY_RESOURCE("MapTip", CImage);
-    // マップ配列データをコピー
-    memcpy(stage, mazeData, sizeof(mazeData));
+    m_img = COPY_RESOURCE("MapTip", CImage);
 }
 
-// 毎フレームの更新処理
 void Field::Update() {
+    // 空っぽでOK
 }
 
-// 毎フレームの描画処理
-void Field::Draw() {
-    for (int i = 0; i < MAP_HEIGHT; i++) {
-        for (int j = 0; j < MAP_WIDTH; j++) {
-            int t = stage[i][j];
-
-            switch (t) {
-                // --- 1行目のタイル (Y: 0 ～ 32) ---
-            case 0:  m_mapTip.SetRect(32, 0, 32, 32); break; // 床
-            case 1:  m_mapTip.SetRect(32, 0, 64, 32); break; // 支柱
-            case 2:  m_mapTip.SetRect(64, 0, 96, 32); break; // 壁（上）
-            case 3:  m_mapTip.SetRect(96, 0, 128, 32); break; // 壁（下）
-            case 4:  m_mapTip.SetRect(128, 0, 160, 32); break; // 壁（右）
-            case 5:  m_mapTip.SetRect(160, 0, 192, 32); break; // 壁（左）
-                
-                // --- 2行目のタイル (Y: 32 ～ 64) ---
-            case 6:  m_mapTip.SetRect(0, 32, 32, 64); break; // 左壁
-            case 7:  m_mapTip.SetRect(32, 32, 64, 64); break; // 上扉
-            case 8:  m_mapTip.SetRect(64, 32, 96, 64); break; // 下扉
-            case 9:  m_mapTip.SetRect(96, 32, 128, 64); break; // 右扉
-            case 10: m_mapTip.SetRect(128, 32, 160, 64); break; // 左扉
-
-            default:
-                m_mapTip.SetRect(0, 0, 32, 32); break;
-            }
-
-            m_mapTip.SetSize(MAP_TIP_SIZE, MAP_TIP_SIZE);
-            m_mapTip.SetPos(MAP_TIP_SIZE * j - m_scroll.x, MAP_TIP_SIZE * i - m_scroll.y);
-            m_mapTip.Draw();
-        }
-    }
-}
-
-
-int Field::CollisionPoint(const CVector2D& pos) {
+// 指定位置のマップ番号を取得
+int Field::GetTip(const CVector2D& pos) {
     int col = (int)(pos.x / MAP_TIP_SIZE);
     if (col < 0) col = 0;
     if (col > MAP_WIDTH - 1) col = MAP_WIDTH - 1;
@@ -67,17 +66,24 @@ int Field::CollisionPoint(const CVector2D& pos) {
     if (row < 0) row = 0;
     if (row > MAP_HEIGHT - 1) row = MAP_HEIGHT - 1;
 
-    int t = stage[row][col];
-
-    // 1 (床) のときは「当たり判定なし(0)」＝通り抜けOK
-    if (t == 1) {
-        return 0;
-    }
-
-    // 1 (床) 以外（0や壁）はすべて「壁に当たった(1)」として判定！
+    // ステージ番号に合わせて配列を自動選択！
+    if (g_currentStage == 1)      return mazeData1[row][col];
+    else if (g_currentStage == 2) return mazeData2[row][col];
+    else if (g_currentStage == 3) return mazeData3[row][col];
     return 1;
 }
-// 矩形（キャラクターの四隅）での当たり判定
+
+// 当たり判定チェック（1, 7以上 はすり抜けOK）
+int Field::CollisionPoint(const CVector2D& pos) {
+    int t = GetTip(pos);
+
+    if (t == 1 || t == 7 || t == 8 || t == 9 || t == 10) {
+        return 0; // すり抜けOK
+    }
+
+    return 1; // それ以外の壁は押し戻す
+}
+
 int Field::CollisionRect(const CVector2D& pos, const CRect& rect) {
     CRect r = CRect(
         pos.x + rect.m_left,
@@ -85,12 +91,44 @@ int Field::CollisionRect(const CVector2D& pos, const CRect& rect) {
         pos.x + rect.m_right,
         pos.y + rect.m_bottom
     );
-
     int t;
-    t = CollisionPoint(CVector2D(r.m_left, r.m_top));     if (t != 0) return t;
-    t = CollisionPoint(CVector2D(r.m_right, r.m_top));    if (t != 0) return t;
-    t = CollisionPoint(CVector2D(r.m_left, r.m_bottom));  if (t != 0) return t;
-    t = CollisionPoint(CVector2D(r.m_right, r.m_bottom)); if (t != 0) return t;
+    t = CollisionPoint(CVector2D(r.m_left, r.m_top));
+    if (t != 0) return t;
+    t = CollisionPoint(CVector2D(r.m_right, r.m_top));
+    if (t != 0) return t;
+    t = CollisionPoint(CVector2D(r.m_left, r.m_bottom));
+    if (t != 0) return t;
+    t = CollisionPoint(CVector2D(r.m_right, r.m_bottom));
+    if (t != 0) return t;
 
     return 0;
+}
+
+void Field::Draw() {
+    for (int i = 0; i < MAP_HEIGHT; i++) {     // 行 (Y)
+        for (int j = 0; j < MAP_WIDTH; j++) {  // 列 (X)
+
+            int t = 0;
+            if (g_currentStage == 1)      t = mazeData1[i][j];
+            else if (g_currentStage == 2) t = mazeData2[i][j];
+            else if (g_currentStage == 3) t = mazeData3[i][j];
+
+            if (t == 0) continue; // 0(空) は描画スキップ
+
+            // ★ 1行に並んでいるタイルの枚数（5か6に合わせて書き換えてね！）
+            int TILES_PER_ROW = 6;
+
+            // 2列目以降も正しく切り抜く計算
+            int texX = (t % TILES_PER_ROW) * 32;
+            int texY = (t / TILES_PER_ROW) * 32;
+
+            m_img.SetRect(texX, texY, texX + 32, texY + 32);
+
+            // 画面上での表示サイズと位置をセット
+            m_img.SetSize(MAP_TIP_SIZE, MAP_TIP_SIZE);
+            m_img.SetPos(CVector2D(j * MAP_TIP_SIZE, i * MAP_TIP_SIZE));
+
+            m_img.Draw();
+        }
+    }
 }

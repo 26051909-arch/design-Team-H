@@ -5,11 +5,12 @@
 #define MAP_WIDTH    15
 #define MAP_HEIGHT   8
 #define MAP_TIP_SIZE 128
-
+extern int g_currentStage;
 class Field : public Base {
 private:
     CImage m_mapTip;                     // マップチップ画像オブジェクト
     int stage[MAP_HEIGHT][MAP_WIDTH];    // マップ配置データ（0:床, 1以上:壁など）
+    CImage m_img;
 
 public:
     // コンストラクタ（初期化）
@@ -22,4 +23,6 @@ public:
     // 当たり判定用関数
     int CollisionPoint(const CVector2D& pos);
     int CollisionRect(const CVector2D& pos, const CRect& rect);
+    int GetTip(const CVector2D& pos);
 };
+extern int g_currentStage;
