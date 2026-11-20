@@ -338,16 +338,22 @@ void Player::Update()
 {
     m_pos_old = m_pos;
     //ダメージアニメーション確認用
-    // 1秒につき5ずつ体力を減らす（60FPSの場合）
-    /*if (m_state != eState_Death)
+    // 5秒につき5ずつ体力を減らす（60FPSの場合）
+    if (m_state != eState_Death)
     {
-        m_hp = max(m_hp - 5.0f / 60.0f, 0.0f);
+        m_damage_timer += 1.0f / 60.0f;
+
+        if (m_damage_timer >= 5.0f)
+        {
+            TakeDamage(5.0f);
+            m_damage_timer = 0.0f;
+        }
 
         if (m_hp <= 0)
         {
             m_state = eState_Death;
         }
-    }*/
+    }
 
     m_pos_old = m_pos;
 
@@ -627,27 +633,31 @@ static TexAnim _gardYoko[] = {
 };
 
 static TexAnim _damageMae[] = {
-    {72,2},
-    {73,2},
-    {74,2},
-    {75,2},
-    {76,2},
+    {72,5},
+    {61,5},
+    {72,5},
+    {61,5},
+    {72,5},
+    {61,5},
+
 };
 
 static TexAnim _damageUshiro[] = {
-    {78,2},
-    {79,2},
-    {80,2},
-    {81,2},
-    {82,2},
+    {78,5},
+    {61,5},
+    {78,5},
+    {61,5},
+    {78,5},
+    {61,5},
+   
 };
 
 static TexAnim _damageYoko[] = {
-    {84,2},
-    {85,2},
-    {86,2},
-    {87,2},
-    {88,2},
+    {84,6},
+    {85,6},
+    {86,6},
+    {87,6},
+    {88,6},
 };
 
 static TexAnim _deathMae[] = {

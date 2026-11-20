@@ -101,6 +101,8 @@ public:
 	//ƒQƒbƒg”¯
 	int m_hear_count;
 
+	float m_damage_timer = 0.0f;
+
 	//‰ß‹Ž‚ÌˆÊ’u
 	CVector2D m_pos_old;
 
