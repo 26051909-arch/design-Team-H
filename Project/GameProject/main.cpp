@@ -1,6 +1,6 @@
 #include "Base/Base.h"
 #include"Game/Player.h"
-#include"Game/Ghost.h"
+#include"Game/GhostT.h"
 #include"Game/Field.h"
 
 void MainLoop(void) {
@@ -92,7 +92,7 @@ void Init(void)
 	//-----------------------------------------------------
 	
 	//èºâ∫
-	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/HitoSprite(2).png", Player::_anim_data, 128, 128));
+	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/HitoSprite(3).png", Player::_anim_data, 128, 128));
 
 
 

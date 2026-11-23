@@ -339,7 +339,7 @@ void Player::Update()
     m_pos_old = m_pos;
     //ダメージアニメーション確認用
     // 5秒につき5ずつ体力を減らす（60FPSの場合）
-    if (m_state != eState_Death)
+   /* if (m_state != eState_Death)
     {
         m_damage_timer += 1.0f / 60.0f;
 
@@ -353,7 +353,7 @@ void Player::Update()
         {
             m_state = eState_Death;
         }
-    }
+    }*/
 
     m_pos_old = m_pos;
 
@@ -540,45 +540,57 @@ static TexAnim _idleYoko[] = {
 };
 
 static TexAnim _warkMae[] = {
-    {18,6},
+   // {18,6},
     {19,6},
     {20,6},
     {21,6},
+   // {22,6},
 };
 
 static TexAnim _runMae[] = {
-    {18,4},
+   // {18,4},
     {19,4},
     {20,4},
     {21,4},
+   // {22,4},
 };
 
 static TexAnim _warkUshiro[] = {
-    {24,6},
+  //  {24,6},
     {25,6},
     {26,6},
     {27,6},
 };
 
 static TexAnim _runUshiro[] = {
-    {24,4},
+  //  {24,4},
     {25,4},
     {26,4},
     {27,4},
 };
 
 static TexAnim _warkYoko[] = {
-    {30,6},
+  /*  {30,6},
     {31,6},
     {32,6},
+    {33,6},*/
+
     {33,6},
+    {32,6},
+    {30,6},
+    {31,6},
 };
 
 static TexAnim _runYoko[] = {
-    {30,4},
+    /*{30,4},
     {31,4},
     {32,4},
+    {33,4},*/
+
     {33,4},
+    {32,4},
+    {30,4},
+    {31,4},
 };
 
 static TexAnim _attackMae[] = {
