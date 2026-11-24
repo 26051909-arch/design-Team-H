@@ -2,7 +2,7 @@
 #include"Base/Base.h"
 
 
-class Ghost : public Base
+class GhostT : public Base
 {
 private:
 	//アニメーションの種類
@@ -23,8 +23,12 @@ private:
 		eAnimDamageUshiro,
 		eAnimDamageYoko,
 		eAnimDeathMae,
+		eAnimDeathMaeF,
 		eAnimDeathUshiro,
+		eAnimDeathUshiroF,
 		eAnimDeathYoko,
+		eAnimDeathYokoF,
+
 	};
 
 
@@ -35,5 +39,13 @@ private:
 		eState_Damage,
 		eState_Death,
 	};
+
+
+	//各状態での挙動
+	void StateIdle();
+	void StateAttack();
+	void StateDamage();
+	void StateDeath();
+
 
 };

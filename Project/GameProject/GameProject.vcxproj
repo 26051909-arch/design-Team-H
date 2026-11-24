@@ -24,6 +24,7 @@
     <ClInclude Include="Game\GhostT.h" />
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\PlayerFinger.h" />
+    <ClInclude Include="Game\Shouninn.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="ItemSlot.h" />
   </ItemGroup>
@@ -33,6 +34,7 @@
     <ClCompile Include="Game\GhostT.cpp" />
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\PlayerFinger.cpp" />
+    <ClCompile Include="Game\Shouninn.cpp" />
     <ClCompile Include="ItemSlot.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
