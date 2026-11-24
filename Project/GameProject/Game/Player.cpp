@@ -532,21 +532,21 @@ void Player::SetPlayerAnimation(int anim)
 
 
 static TexAnim _idleMae[] = {
-    {0,10},
-    {1,10},
+    {0,12},
+    {1,12},
    // {2,5},
 };
 
 static TexAnim _idleUshiro[] = {
-    {6,5},
-    {7,5},
-    {8,5},
+    {6,12},
+    {7,12},
+   // {8,5},
 };
 
 static TexAnim _idleYoko[] = {
-    {12,5},
-    {13,5},
-    {14,5},
+    {12,12},
+    {13,12},
+   // {14,5},
 };
 
 static TexAnim _warkMae[] = {
