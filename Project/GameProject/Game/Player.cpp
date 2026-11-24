@@ -522,9 +522,9 @@ void Player::SetPlayerAnimation(int anim)
 
 
 static TexAnim _idleMae[] = {
-    {0,5},
-    {1,5},
-    {2,5},
+    {0,10},
+    {1,10},
+   // {2,5},
 };
 
 static TexAnim _idleUshiro[] = {
