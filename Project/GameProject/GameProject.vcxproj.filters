@@ -17,7 +17,15 @@
     <ClInclude Include="Game\GhostT.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="ItemSlot.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Shouninn.h">
+      <Filter>Game</Filter>
+    </ClInclude>
     <ClInclude Include="Game\Trader.h">
+      <Filter>Game</Filter>
+    </ClInclude>
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -37,6 +45,12 @@
     </ClCompile>
     <ClCompile Include="Game\GhostT.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemSlot.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Shouninn.cpp">
+    <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Trader.cpp">
       <Filter>Game</Filter>
