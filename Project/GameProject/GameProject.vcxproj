@@ -26,7 +26,6 @@
     <ClInclude Include="Game\PlayerFinger.h" />
     <ClInclude Include="Game\Trader.h" />
     <ClInclude Include="Global.h" />
-    <ClInclude Include="ItemSlot.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Base.cpp" />
@@ -35,7 +34,6 @@
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\PlayerFinger.cpp" />
     <ClCompile Include="Game\Trader.cpp" />
-    <ClCompile Include="ItemSlot.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

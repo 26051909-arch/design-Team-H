@@ -1,67 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Global.h" />
-    <ClInclude Include="Base\Base.h">
-      <Filter>Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Field.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Player.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayerFinger.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GhostT.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemSlot.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Shouninn.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Trader.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-      <Filter>Game</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="Base\Base.cpp" />
+    <ClCompile Include="Game\Field.cpp" />
+    <ClCompile Include="Game\GhostT.cpp" />
+    <ClCompile Include="Game\Player.cpp" />
+    <ClCompile Include="Game\PlayerFinger.cpp" />
+    <ClCompile Include="Game\Trader.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Base\Base.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Field.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Player.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayerFinger.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GhostT.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemSlot.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Shouninn.cpp">
-    <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Trader.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Base">
-      <UniqueIdentifier>{7e4d9da9-5c95-4825-a546-255408456531}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{e7b02635-49e7-4ea7-8548-353c5f94c61d}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="Base\Base.h" />
+    <ClInclude Include="Game\Field.h" />
+    <ClInclude Include="Game\GhostT.h" />
+    <ClInclude Include="Game\Player.h" />
+    <ClInclude Include="Game\PlayerFinger.h" />
+    <ClInclude Include="Game\Trader.h" />
+    <ClInclude Include="Global.h" />
   </ItemGroup>
 </Project>
