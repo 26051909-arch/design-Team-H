@@ -1,7 +1,7 @@
 #include "Base/Base.h"
 #include"Game/Player.h"
 #include"Game/GhostT.h"
-#include"Game/Shouninn.h"
+#include"Game/Trader.h"
 #include"Game/Field.h"
 
 void MainLoop(void) {
@@ -94,7 +94,7 @@ void Init(void)
 	
 	//èºâ∫
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/HitoSprite(3).png", Player::_anim_data, 128, 128));
-	//ADD_RESOURCE("Shouninn", CImage::CreateImage("Image/Shouninn/ShouninnSprite.png", Shouninn::_anim_data, 128, 128));
+	ADD_RESOURCE("Trader", CImage::CreateImage("Image/Shouninn/ShouninnSprite.png", Trader::_anim_data, 128, 128));
 
 
 

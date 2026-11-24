@@ -8,7 +8,7 @@ enum {
     eType_Enemy,
     eType_GhostT,
     eType_GhostY,
-    eType_Shouninn,
+    eType_Trader,
     eType_Goal,
     eType_Player_Attack,
     eType_Enemy_Attack,

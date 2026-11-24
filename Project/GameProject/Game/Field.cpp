@@ -1,4 +1,5 @@
 #include "Field.h"
+#include"Trader.h"
 
 // 迷路のマップデータ（0:空, 1:床, 2~6:壁, 7~10:移動口）
 static int mazeData1[MAP_HEIGHT][MAP_WIDTH] = {
@@ -77,7 +78,14 @@ Field::Field() : Base(eType_Field) {
 }
 
 void Field::Update() {
-    // 空っぽでOK
+    
+    //ステージ５に入ったら商人を作成
+    if (g_currentStage == 5 && !m_stage5CharacterCreated)
+    {
+        new Trader(CVector2D(960, 540));
+
+        m_stage5CharacterCreated = true;
+    }
 }
 
 int Field::GetTip(const CVector2D& pos) {

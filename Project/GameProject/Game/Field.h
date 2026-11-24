@@ -24,5 +24,8 @@ public:
     int CollisionPoint(const CVector2D& pos);
     int CollisionRect(const CVector2D& pos, const CRect& rect);
     int GetTip(const CVector2D& pos);
+
+    bool m_stage5CharacterCreated = false;
+
 };
 extern int g_currentStage;

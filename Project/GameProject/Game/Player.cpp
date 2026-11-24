@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Field.h"
+#include"Trader.h"
 
 
 
@@ -485,6 +486,15 @@ void Player::Collision(Base* b) {
                 m_vec.y = 0;
                 m_is_ground = true;
             }
+        }
+        break;
+
+
+
+    case eType_Trader:
+        if (Base::CollisionRect(this, b)) 
+        {
+            m_pos = m_pos_old;
         }
         break;
     }
