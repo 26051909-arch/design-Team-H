@@ -445,30 +445,30 @@ void Player::Collision(Base* b) {
             }
             else if (tip == 10 && g_currentStage == 3) { //  左ドア(10)を踏んだらステージ4へ
                 g_currentStage = 4;
-                m_pos = CVector2D(13 * MAP_TIP_SIZE, 2.92 * MAP_TIP_SIZE); // ステージ4の右端(行2)に着地
+                m_pos = CVector2D(13 * MAP_TIP_SIZE, 6.8 * MAP_TIP_SIZE); // ステージ4の右端(行2)に着地
                 m_pos_old = m_pos;
             }
 
             // ==========================================
-            // ステージ4 (9:右ドア / 10:左ドア)
+            // ステージ4 (9:右ドア / 7:上ドア)
             // ==========================================
             else if (tip == 9 && g_currentStage == 4) { //  右ドア(9)を踏んだらステージ3へ戻る
                 g_currentStage = 3;
                 m_pos = CVector2D(1.5 * MAP_TIP_SIZE, 2.92 * MAP_TIP_SIZE); // ステージ3の左ドア(行2)の前へ
                 m_pos_old = m_pos;
             }
-            else if (tip == 8 && g_currentStage == 4) { //  左ドア(10)を踏んだらステージ5へ
+            else if (tip == 7 && g_currentStage == 4) { //  左ドア(10)を踏んだらステージ5へ
                 g_currentStage = 5;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2 * MAP_TIP_SIZE); // ステージ5へ
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6.8 * MAP_TIP_SIZE); // ステージ5へ
                 m_pos_old = m_pos;
             }
 
             // ==========================================
-            // ステージ5 (7:左ドアから戻る場合など)
+            // ステージ5 (8:左ドアから戻る場合など)
             // ==========================================
-            else if (tip == 7 && g_currentStage == 5) {
+            else if (tip == 8 && g_currentStage == 5) {
                 g_currentStage = 4;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 7 * MAP_TIP_SIZE); // ステージ4の左ドア前へ
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2 * MAP_TIP_SIZE); // ステージ4の上ドア前へ
                 m_pos_old = m_pos;
             }
             // ---  ここまで ---
