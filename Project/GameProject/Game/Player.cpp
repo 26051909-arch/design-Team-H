@@ -472,20 +472,48 @@ void Player::Collision(Base* b) {
                 m_pos_old = m_pos;
             }
             else if (tip == 9 && g_currentStage == 5) { //  右ドア(9)を踏んだらステージ6へ
-                g_currentStage = 600;
-                m_pos = CVector2D(11.6 * MAP_TIP_SIZE, 6.9 * MAP_TIP_SIZE); // ステージ6へ
+                g_currentStage = 61;
+                m_pos = CVector2D(3 * MAP_TIP_SIZE, 6.9 * MAP_TIP_SIZE); // ステージ6へ
                 m_pos_old = m_pos;
             }
             else if (tip == 10 && g_currentStage == 5) { //  左ドア(10)を踏んだらステージ6へ
-                g_currentStage = 600;
-                m_pos = CVector2D(3.4 * MAP_TIP_SIZE, 6.9 * MAP_TIP_SIZE); // ステージ6へ
+                g_currentStage = 60;
+                m_pos = CVector2D(12 * MAP_TIP_SIZE, 6.9 * MAP_TIP_SIZE); // ステージ6へ
                 m_pos_old = m_pos;
             }
 
 // ==========================================
-// ボスステージ (8:下ドアから戻る場合など)
+// ステージ6 (10:左ドアから戻る場合など)
 // ==========================================
-            else if (tip == 8 && g_currentStage == 600) {
+            else if (tip == 9 && g_currentStage == 60) { //  右ドア(9)を踏んだらステージ6へ
+                g_currentStage = 5;
+                m_pos = CVector2D(3 * MAP_TIP_SIZE, 2.8 * MAP_TIP_SIZE); // ステージ6へ
+                m_pos_old = m_pos;
+            }
+
+
+            else if (tip == 10 && g_currentStage == 61) { //  左ドア(10)を踏んだらステージ6へ
+                g_currentStage = 5;
+                m_pos = CVector2D(12 * MAP_TIP_SIZE, 2.8 * MAP_TIP_SIZE); // ステージ6へ
+                m_pos_old = m_pos;
+            }
+
+
+
+
+
+
+
+
+// ==========================================
+// ボス前ステージ (8:下ドアから戻る場合など)
+// ==========================================
+            else if (tip == 8 && g_currentStage == 150) {
+                g_currentStage = 5;
+                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 5 * MAP_TIP_SIZE); // ステージ4の上ドア前へ
+                m_pos_old = m_pos;
+            }
+            else if (tip == 8 && g_currentStage == 150) {
                 g_currentStage = 5;
                 m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 5 * MAP_TIP_SIZE); // ステージ4の上ドア前へ
                 m_pos_old = m_pos;

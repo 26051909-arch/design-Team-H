@@ -57,12 +57,32 @@ static int mazeData5[MAP_HEIGHT][MAP_WIDTH] = {
     {2,2,2,2,2,3,3,8,3,3,2,2,2,2,2},
 };
 
-
-
-
-
-static int mazeData600[MAP_HEIGHT][MAP_WIDTH] = {
+static int mazeData60[MAP_HEIGHT][MAP_WIDTH] = {
     {2,4,4,4,4,4,4,4,4,4,4,4,4,4,2},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,9},
+    {2,3,3,3,3,3,3,3,3,3,3,3,3,3,2},
+};
+
+static int mazeData61[MAP_HEIGHT][MAP_WIDTH] = {
+    {2,4,4,4,4,4,4,4,4,4,4,4,4,4,2},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {10,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {2,3,3,3,3,3,3,3,3,3,3,3,3,3,2},
+};
+
+
+
+static int mazeData150[MAP_HEIGHT][MAP_WIDTH] = {
+    {2,4,4,4,4,4,4,7,4,4,4,4,4,4,2},
     {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
     {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
     {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
@@ -86,7 +106,10 @@ int GetMapTile(int stage, int row, int col) {
     case 3: return mazeData3[row][col];
     case 4: return mazeData4[row][col];
     case 5: return mazeData5[row][col];
-    case 600: return mazeData600[row][col];
+
+    case 60: return mazeData60[row][col];
+    case 61: return mazeData61[row][col];
+    case 150: return mazeData150[row][col];
     default: return 1;
     }
 }
