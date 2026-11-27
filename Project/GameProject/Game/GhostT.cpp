@@ -1,6 +1,7 @@
 #include"GhostT.h"
 #include"Field.h"
 #include"Player.h"
+#include<cmath>
 
 
 GhostT::GhostT(const CVector2D& pos, int direction) : Base(eType_GhostT)
@@ -85,6 +86,55 @@ void GhostT::StateIdle()
 void GhostT::StateChase()
 {
 
+    //追跡処理
+    //プレイヤーを取得
+    Player* player = dynamic_cast<Player*>
+        (
+            Base::FindObject(eType_Player)
+        );
+
+    if (player == nullptr)
+        return;
+
+    //プレイヤーとの距離を計算
+    float dx = player->m_pos.x - m_pos.x;
+    float dy = player->m_pos.y - m_pos.y;
+
+    float distance = sqrt(dx * dx + dy * dy);
+
+
+    //一定距離まで近づいたら攻撃状態へ
+    const float attack_distance = 50.0f;
+
+    if (distance <= attack_distance)
+    {
+        m_state = eState_Attack;
+        return;
+    }
+
+    //移動速度
+    const float chase_speed = 4.5f;
+
+    // 移動方向を決める
+    if (fabs(dx) > fabs(dy))
+    {
+        // 左右方向
+        if (dx < 0)
+            m_direction = eDirection_Left;
+        else
+            m_direction = eDirection_Right;
+    }
+    else
+    {
+        // 上下方向
+        if (dy < 0)
+            m_direction = eDirection_Ushiro;
+        else
+            m_direction = eDirection_Mae;
+    }
+
+
+
     // 向きに応じてチェイスアニメーションに変更
     switch (m_direction)
     {
@@ -103,8 +153,12 @@ void GhostT::StateChase()
     }
 
 
-    //ここから追跡処理
+    // 移動方向を正規化して移動
+    m_vec.x = dx / distance;
+    m_vec.y = dy / distance;
 
+    m_pos.x += m_vec.x * chase_speed;
+    m_pos.y += m_vec.y * chase_speed;
 
 }
 
