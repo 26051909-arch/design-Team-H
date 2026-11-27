@@ -2,6 +2,8 @@
 #include"Game/Player.h"
 #include"Game/GhostT.h"
 #include"Game/Trader.h"
+
+
 #include"Game/Field.h"
 
 void MainLoop(void) {
@@ -95,12 +97,14 @@ void Init(void)
 	//èºâ∫
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player/HitoSprite(3).png", Player::_anim_data, 128, 128));
 	ADD_RESOURCE("Trader", CImage::CreateImage("Image/Shouninn/ShouninnSprite.png", Trader::_anim_data, 128, 128));
+	ADD_RESOURCE("Ghost", CImage::CreateImage("Image/Ghost/BoureiSprite.png", GhostT::_anim_data, 128, 128));
+
 
 
 
 	
 	new Player(CVector2D(2 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE), Player::eDirection_Ushiro);
-
+	new GhostT(CVector2D(5 * MAP_TIP_SIZE, 7 * MAP_TIP_SIZE), GhostT::eDirection_Right);
 
 
 
