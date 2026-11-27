@@ -1,4 +1,4 @@
-#include "Player.h"
+ï»¿#include "Player.h"
 #include "Field.h"
 #include"Trader.h"
 
@@ -11,30 +11,30 @@ Player::Player(const CVector2D& pos, int direction) : Base(eType_Player)
     m_is_ground = true;
     m_rect = CRect(-32, -108, 32, 0);
     m_img = COPY_RESOURCE("Player", CImage);
-    //À•Wİ’è
+    //åº§æ¨™è¨­å®š
     m_pos_old = m_pos = pos;
-    //ƒTƒCƒYİ’è
+    //ã‚µã‚¤ã‚ºè¨­å®š
     m_img.SetSize(128, 128);
-    //’†SˆÊ’uİ’è
+    //ä¸­å¿ƒä½ç½®è¨­å®š
     m_img.SetCenter(64, 123);
 
 
-    //‘Ì—Í‚Ì‰Šú‰»(Å‘å100)
+    //ä½“åŠ›ã®åˆæœŸåŒ–(æœ€å¤§100)
     m_hp = 100.0f;
-    //’Êíó‘Ô‚Ö
+    //é€šå¸¸çŠ¶æ…‹ã¸
     m_state = eState_Idle;
-    //Œü‚«‚Ì‰Šú‰»
+    //å‘ãã®åˆæœŸåŒ–
     m_direction = direction;
 
-    //”½“]ƒtƒ‰ƒO‚Ì‰Šú‰»
+    //åè»¢ãƒ•ãƒ©ã‚°ã®åˆæœŸåŒ–
     m_flip = (m_direction == eDirection_Right);
 
-    //”¯‚Ì”
+    //é«ªã®æ•°
     m_hear_count = 0;
 
     m_anim = -1;
 
-    //Œü‚«‚É‰‚¶‚½ƒAƒjƒ[ƒVƒ‡ƒ“İ’è
+    //å‘ãã«å¿œã˜ãŸã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³è¨­å®š
     switch (m_direction)
     {
     case eDirection_Mae:
@@ -56,48 +56,48 @@ Player::Player(const CVector2D& pos, int direction) : Base(eType_Player)
 
 void Player::StateIdle()
 {
-    //•à‚«E‘–‚è‚ÌˆÚ“®‘¬“x
+    //æ­©ããƒ»èµ°ã‚Šã®ç§»å‹•é€Ÿåº¦
     const float walk_speed = 4.0f;
     const float run_speed = 7.0f;
 
 
-    //Shift‚ğ‰Ÿ‚µ‚Ä‚¢‚éŠÔ‚Í‘–‚é
+    //Shiftã‚’æŠ¼ã—ã¦ã„ã‚‹é–“ã¯èµ°ã‚‹
     bool run_flag = HOLD(CInput::eShift);
 
     float move_speed = run_flag ? run_speed : walk_speed;
 
-    //ˆÚ“®—Ê
+    //ç§»å‹•é‡
     float move_x = 0.0f;
     float move_y = 0.0f;
 
-    //ˆÚ“®ƒtƒ‰ƒO
+    //ç§»å‹•ãƒ•ãƒ©ã‚°
     bool move_flag = false;
 
 
-    //‰EˆÚ“®
+    //å³ç§»å‹•
     if (HOLD(CInput::eRight))
         move_x += 1.0f;
 
 
-    //¶ˆÚ“®
+    //å·¦ç§»å‹•
     if (HOLD(CInput::eLeft))
         move_x -= 1.0f;
 
-    //ãˆÚ“®
+    //ä¸Šç§»å‹•
     if (HOLD(CInput::eUp))
         move_y -= 1.0f;
 
-    //‰ºˆÚ“®
+    //ä¸‹ç§»å‹•
     if (HOLD(CInput::eDown))
         move_y += 1.0f;
 
 
-    //ˆÚ“®‚µ‚Ä‚¢‚é‚©Šm”F
+    //ç§»å‹•ã—ã¦ã„ã‚‹ã‹ç¢ºèª
     move_flag = (move_x != 0.0f || move_y != 0.0f);
 
     if (move_flag)
     {
-        //Î‚ßˆÚ“®‚Ì‘¬“x’²®
+        //æ–œã‚ç§»å‹•ã®é€Ÿåº¦èª¿æ•´
         if (move_x != 0.0f && move_y != 0.0f)
         {
             move_x *= 0.7071f;
@@ -105,11 +105,11 @@ void Player::StateIdle()
         }
 
 
-        //À•WXV
+        //åº§æ¨™æ›´æ–°
         m_pos.x += move_x * move_speed;
         m_pos.y += move_y * move_speed;
 
-        //Œü‚«‚Ì•ÏX
+        //å‘ãã®å¤‰æ›´
         if (move_y < 0)
             m_direction = eDirection_Ushiro;
         else if (move_y > 0)
@@ -119,12 +119,12 @@ void Player::StateIdle()
         else if (move_x > 0)
             m_direction = eDirection_Right;
 
-        //”½“]ƒtƒ‰ƒO
+        //åè»¢ãƒ•ãƒ©ã‚°
         m_flip = (m_direction == eDirection_Right);
 
     }
 
-    //ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‘I‘ğ
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®é¸æŠ
     int anim = -1;
 
     if (move_flag)
@@ -167,16 +167,16 @@ void Player::StateIdle()
     if (anim != -1)
         SetPlayerAnimation(anim);
 
-    //UŒ‚
+    //æ”»æ’ƒ
     if (PUSH(CInput::eMouseL)) {
-        //UŒ‚ó‘Ô‚ÖˆÚs
+        //æ”»æ’ƒçŠ¶æ…‹ã¸ç§»è¡Œ
         m_state = eState_Attack;
     }
 
 
-    //–hŒä
+    //é˜²å¾¡
     if (PUSH(CInput::eMouseR)) {
-        //–hŒäó‘Ô‚ÖˆÚs
+        //é˜²å¾¡çŠ¶æ…‹ã¸ç§»è¡Œ
         m_state = eState_Gard;
     }
 
@@ -187,7 +187,7 @@ void Player::StateAttack()
     int anim = -1;
 
 
-    //Œü‚«‚É‰‚¶‚½UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+    //å‘ãã«å¿œã˜ãŸæ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     switch (m_direction)
     {
     case eDirection_Mae:
@@ -204,14 +204,14 @@ void Player::StateAttack()
         break;
     }
 
-    //UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŠJn
+    //æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®é–‹å§‹
     if (m_anim != anim && anim != -1)
     {
         m_anim = anim;
         m_img.ChangeAnimation(anim, false);
     }
 
-    //ƒAƒjƒ[ƒVƒ‡ƒ“‚ªI—¹‚µ‚½‚ç’Êíó‘Ô‚Ö
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚äº†ã—ãŸã‚‰é€šå¸¸çŠ¶æ…‹ã¸
     if (m_img.CheckAnimationEnd())
     {
         m_state = eState_Idle;
@@ -223,7 +223,7 @@ void Player::StateAttack()
 
 void Player::StateGard()
 {
-    //‰EƒNƒŠƒbƒN‚ğ—£‚µ‚½‚ç’Êíó‘Ô‚Ö–ß‚é
+    //å³ã‚¯ãƒªãƒƒã‚¯ã‚’é›¢ã—ãŸã‚‰é€šå¸¸çŠ¶æ…‹ã¸æˆ»ã‚‹
     if (!HOLD(CInput::eMouseR))
     {
         m_state = eState_Idle;
@@ -233,7 +233,7 @@ void Player::StateGard()
 
     int anim = -1;
 
-    //Œü‚«‚É‰‚¶‚½UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+    //å‘ãã«å¿œã˜ãŸæ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     switch (m_direction)
     {
     case eDirection_Mae:
@@ -250,7 +250,7 @@ void Player::StateGard()
         break;
     }
 
-    //ƒAƒjƒ[ƒVƒ‡ƒ“•ÏX
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å¤‰æ›´
     if (anim != -1)
         SetPlayerAnimation(anim);
 
@@ -262,7 +262,7 @@ void Player::StateDamage()
 
     int anim = -1;
 
-    //Œü‚«‚É‰‚¶‚½ƒ_ƒ[ƒWƒAƒjƒ[ƒVƒ‡ƒ“
+    //å‘ãã«å¿œã˜ãŸãƒ€ãƒ¡ãƒ¼ã‚¸ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     switch (m_direction)
     {
     case eDirection_Mae:
@@ -280,14 +280,14 @@ void Player::StateDamage()
     }
 
 
-    //UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŠJn
+    //æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®é–‹å§‹
     if (m_anim != anim && anim != -1)
     {
         m_anim = anim;
         m_img.ChangeAnimation(anim, false);
     }
 
-    //ƒAƒjƒ[ƒVƒ‡ƒ“‚ªI—¹‚µ‚½‚ç’Êíó‘Ô‚Ö
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚äº†ã—ãŸã‚‰é€šå¸¸çŠ¶æ…‹ã¸
     if (m_img.CheckAnimationEnd())
     {
         m_state = eState_Idle;
@@ -301,7 +301,7 @@ void Player::StateDown()
 
     int anim = -1;
 
-    //Œü‚«‚É‰‚¶‚½€–SƒAƒjƒ[ƒVƒ‡ƒ“
+    //å‘ãã«å¿œã˜ãŸæ­»äº¡ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     switch (m_direction)
     {
     case eDirection_Mae:
@@ -319,7 +319,7 @@ void Player::StateDown()
     }
 
 
-    //€–SƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŠJn
+    //æ­»äº¡ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®é–‹å§‹
     if (m_anim != anim && anim != -1)
     {
         m_anim = anim;
@@ -327,7 +327,7 @@ void Player::StateDown()
     }
 
 
-    //ƒAƒjƒ[ƒVƒ‡ƒ“I—¹Šm”F
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†ç¢ºèª
     if (m_img.CheckAnimationEnd()) {
         SetKill();
     }
@@ -337,25 +337,50 @@ void Player::StateDown()
 
 void Player::Update()
 {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     m_pos_old = m_pos;
-    //ƒ_ƒ[ƒWƒAƒjƒ[ƒVƒ‡ƒ“Šm”F—p
-    // 5•b‚É‚Â‚«5‚¸‚Â‘Ì—Í‚ğŒ¸‚ç‚·i60FPS‚Ìê‡j
-   /* if (m_state != eState_Death)
-    {
-        m_damage_timer += 1.0f / 60.0f;
 
-        if (m_damage_timer >= 5.0f)
+    // (Debugç”¨)
+    if (PUSH(CInput::eButton5)) { // eButton5 ï¼ Spaceã‚­ãƒ¼
+        g_currentStage = 61;
+
+        // ã‚¹ãƒ†ãƒ¼ã‚¸5ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å‡ºç¾ä½ç½®ã«ç§»å‹•
+        m_pos = CVector2D(1 * MAP_TIP_SIZE, 6.9 * MAP_TIP_SIZE);
+        m_pos_old = m_pos;
+
+    }
+        //ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ç¢ºèªç”¨
+        // 5ç§’ã«ã¤ã5ãšã¤ä½“åŠ›ã‚’æ¸›ã‚‰ã™ï¼ˆ60FPSã®å ´åˆï¼‰
+       /* if (m_state != eState_Death)
         {
-            TakeDamage(5.0f);
-            m_damage_timer = 0.0f;
-        }
+            m_damage_timer += 1.0f / 60.0f;
 
-        if (m_hp <= 0)
-        {
-            m_state = eState_Death;
-        }
-    }*/
+            if (m_damage_timer >= 5.0f)
+            {
+                TakeDamage(5.0f);
+                m_damage_timer = 0.0f;
+            }
 
+            if (m_hp <= 0)
+            {
+                m_state = eState_Death;
+            }
+        }*/
     m_pos_old = m_pos;
 
     switch (m_state)
@@ -382,7 +407,7 @@ void Player::Update()
     }
 
 
-    //ƒAƒjƒ[ƒVƒ‡ƒ“XV
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ›´æ–°
     m_img.UpdateAnimation();
 
 
@@ -403,130 +428,138 @@ void Player::Draw()
 
 
 
-
 void Player::Collision(Base* b) {
     switch (b->m_type) {
     case eType_Field:
         if (Field* f = dynamic_cast<Field*>(b)) {
 
-            // ‘«Œ³‚©‚ç‘Ì‚Ì’†‰›‚ ‚½‚è‚Ìƒ}ƒbƒv”š‚ğæ“¾
+            //  è¶³å…ƒ ä½“ã®ä¸­å¤®ä»˜è¿‘ã®ãƒãƒƒãƒ—ãƒãƒƒãƒ—ç•ªå·ã‚’å–å¾—
             int tip = f->GetTip(m_pos + CVector2D(0, -32));
 
-            // ==========================================
-            // ƒXƒe[ƒW1 (7:ãƒhƒA)
-            // ==========================================
-            if (tip == 7 && g_currentStage == 1) {
-                g_currentStage = 2;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE); // ƒXƒe[ƒW2‚Ì‰ºƒhƒA‘O‚Ö
+            //  ãƒ¯ãƒ¼ãƒ—å‡¦ç†ç”¨ã®å…±é€šé–¢æ•°ï¼ˆC2360ã‚¨ãƒ©ãƒ¼å›é¿ã®ãŸã‚ switch ã®å‰ã§å®šç¾©ï¼‰
+            auto Warp = [&](int nextStage, float tileX, float tileY) {
+                g_currentStage = nextStage;
+                m_pos = CVector2D(tileX * MAP_TIP_SIZE, tileY * MAP_TIP_SIZE);
                 m_pos_old = m_pos;
-            }
+                };
 
-            // ==========================================
-            // ƒXƒe[ƒW2 (8:‰ºƒhƒA / 7:ãƒhƒA)
-            // ==========================================
-            else if (tip == 8 && g_currentStage == 2) {
-                g_currentStage = 1;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2.5 * MAP_TIP_SIZE); // ƒXƒe[ƒW1‚ÌãƒhƒA‘O‚Ö
-                m_pos_old = m_pos;
-            }
-            else if (tip == 7 && g_currentStage == 2) {
-                g_currentStage = 3;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE); // ƒXƒe[ƒW3‚Ì‰ºƒhƒA‘O‚Ö
-                m_pos_old = m_pos;
-            }
+            //  ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã”ã¨ã«æ•´ç†ï¼
+            switch (g_currentStage) {
 
-            // ==========================================
-            // ƒXƒe[ƒW3 (8:‰ºƒhƒA / 10:¶ƒhƒA)
-            // ==========================================
-            else if (tip == 8 && g_currentStage == 3) {
-                g_currentStage = 2;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2.5 * MAP_TIP_SIZE); // ƒXƒe[ƒW2‚ÌãƒhƒA‘O‚Ö
-                m_pos_old = m_pos;
-            }
-            else if (tip == 10 && g_currentStage == 3) { //  ¶ƒhƒA(10)‚ğ“¥‚ñ‚¾‚çƒXƒe[ƒW4‚Ö
-                g_currentStage = 4;
-                m_pos = CVector2D(13 * MAP_TIP_SIZE, 6.9 * MAP_TIP_SIZE); // ƒXƒe[ƒW4‚Ì‰E’[(s2)‚É’…’n
-                m_pos_old = m_pos;
-            }
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 1
+                // --------------------------------------------------
+            case 1:
+                if (tip == 7) Warp(2, 7.5f, 6.0f); // 2ã¸ï¼ˆä¸‹ãƒ‰ã‚¢å‰ï¼‰
+                break;
 
-            // ==========================================
-            // ƒXƒe[ƒW4 (9:‰EƒhƒA / 7:ãƒhƒA)
-            // ==========================================
-            else if (tip == 9 && g_currentStage == 4) { //  ‰EƒhƒA(9)‚ğ“¥‚ñ‚¾‚çƒXƒe[ƒW3‚Ö–ß‚é
-                g_currentStage = 3;
-                m_pos = CVector2D(1.5 * MAP_TIP_SIZE, 2.92 * MAP_TIP_SIZE); // ƒXƒe[ƒW3‚Ì¶ƒhƒA(s2)‚Ì‘O‚Ö
-                m_pos_old = m_pos;
-            }
-            else if (tip == 7 && g_currentStage == 4) { //  ¶ƒhƒA(10)‚ğ“¥‚ñ‚¾‚çƒXƒe[ƒW5‚Ö
-                g_currentStage = 5;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 6.9 * MAP_TIP_SIZE); // ƒXƒe[ƒW5‚Ö
-                m_pos_old = m_pos;
-            }
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 2
+                // --------------------------------------------------
+            case 2:
+                if (tip == 8) Warp(1, 7.5f, 2.5f); // 1ã¸ï¼ˆä¸Šãƒ‰ã‚¢å‰ï¼‰
+                if (tip == 7) Warp(3, 7.5f, 6.0f); // 3ã¸ï¼ˆä¸‹ãƒ‰ã‚¢å‰ï¼‰
+                break;
 
-            // ==========================================
-            // ƒXƒe[ƒW5 (8:¶ƒhƒA‚©‚ç–ß‚éê‡‚È‚Ç)
-            // ==========================================
-            else if (tip == 8 && g_currentStage == 5) {
-                g_currentStage = 4;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 2 * MAP_TIP_SIZE); // ƒXƒe[ƒW4‚ÌãƒhƒA‘O‚Ö
-                m_pos_old = m_pos;
-            }
-            else if (tip == 9 && g_currentStage == 5) { //  ‰EƒhƒA(9)‚ğ“¥‚ñ‚¾‚çƒXƒe[ƒW6‚Ö
-                g_currentStage = 61;
-                m_pos = CVector2D(3 * MAP_TIP_SIZE, 6.9 * MAP_TIP_SIZE); // ƒXƒe[ƒW6‚Ö
-                m_pos_old = m_pos;
-            }
-            else if (tip == 10 && g_currentStage == 5) { //  ¶ƒhƒA(10)‚ğ“¥‚ñ‚¾‚çƒXƒe[ƒW6‚Ö
-                g_currentStage = 60;
-                m_pos = CVector2D(12 * MAP_TIP_SIZE, 6.9 * MAP_TIP_SIZE); // ƒXƒe[ƒW6‚Ö
-                m_pos_old = m_pos;
-            }
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 3
+                // --------------------------------------------------
+            case 3:
+                if (tip == 8)  Warp(2, 7.5f, 2.5f);  // 2ã¸ï¼ˆä¸Šãƒ‰ã‚¢å‰ï¼‰
+                if (tip == 10) Warp(4, 13.0f, 6.9f); // 4ã¸ï¼ˆå³ç«¯ï¼‰
+                break;
 
-// ==========================================
-// ƒXƒe[ƒW6 (10:¶ƒhƒA‚©‚ç–ß‚éê‡‚È‚Ç)
-// ==========================================
-            else if (tip == 9 && g_currentStage == 60) { //  ‰EƒhƒA(9)‚ğ“¥‚ñ‚¾‚çƒXƒe[ƒW6‚Ö
-                g_currentStage = 5;
-                m_pos = CVector2D(3 * MAP_TIP_SIZE, 2.8 * MAP_TIP_SIZE); // ƒXƒe[ƒW6‚Ö
-                m_pos_old = m_pos;
-            }
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 4
+                // --------------------------------------------------
+            case 4:
+                if (tip == 9) Warp(3, 1.5f, 2.92f); // 3ã¸ï¼ˆå·¦ãƒ‰ã‚¢å‰ï¼‰
+                if (tip == 7) Warp(5, 7.5f, 6.9f);  // 5ã¸
+                break;
 
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 5ï¼ˆå•†äººï¼‰
+                // --------------------------------------------------
+            case 5:
+                if (tip == 8)  Warp(4, 7.5f, 2.0f);   // 4ã¸ï¼ˆä¸Šãƒ‰ã‚¢å‰ï¼‰
+                if (tip == 9)  Warp(61, 1.0f, 6.9f);  // 61ã¸ï¼ˆå³ãƒ«ãƒ¼ãƒˆï¼‰
+                if (tip == 10) Warp(60, 13.7f, 6.9f); // 60ã¸ï¼ˆå·¦ãƒ«ãƒ¼ãƒˆï¼‰
+                break;
 
-            else if (tip == 10 && g_currentStage == 61) { //  ¶ƒhƒA(10)‚ğ“¥‚ñ‚¾‚çƒXƒe[ƒW6‚Ö
-                g_currentStage = 5;
-                m_pos = CVector2D(12 * MAP_TIP_SIZE, 2.8 * MAP_TIP_SIZE); // ƒXƒe[ƒW6‚Ö
-                m_pos_old = m_pos;
-            }
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 60ï¼ˆå·¦ãƒ«ãƒ¼ãƒˆ 1æ®µç›®ãƒ»å†…å´ï¼‰
+                // --------------------------------------------------
+            case 60:
+                if (tip == 9)  Warp(5, 1.0f, 2.95f);  // å³ãƒ‰ã‚¢  å•†äºº(ã‚¹ãƒ†ãƒ¼ã‚¸5)ã¸æˆ»ã‚‹
+                if (tip == 7)  Warp(90, 3.5f, 6.9f); // ä¸Šãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸90ã¸
+                if (tip == 10) Warp(70, 13.7f, 6.9f); // å·¦ãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸70ã¸
+                break;
 
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 61ï¼ˆå³ãƒ«ãƒ¼ãƒˆ 1æ®µç›®ãƒ»å†…å´ï¼‰
+                // --------------------------------------------------
+            case 61:
+                if (tip == 10) Warp(5, 13.7f, 2.95f); // å·¦ãƒ‰ã‚¢  å•†äºº(ã‚¹ãƒ†ãƒ¼ã‚¸5)ã¸æˆ»ã‚‹
+                if (tip == 7)  Warp(91, 6.5f, 6.9f); // ä¸Šãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸91ã¸
+                if (tip == 9)  Warp(71, 1.2f, 6.9f); // å³ãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸71ã¸
+                break;
 
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 70ï¼ˆå·¦ãƒ«ãƒ¼ãƒˆ 1æ®µç›®ãƒ»å¤–å´ï¼‰
+                // --------------------------------------------------
+            case 70:
+                if (tip == 9) Warp(60, 1.2f, 3.88f);  // å³ãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸60ã¸æˆ»ã‚‹
+                if (tip == 7) Warp(100, 3.0f, 2.95f); // ä¸Šãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸100ã¸
+                break;
 
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 71ï¼ˆå³ãƒ«ãƒ¼ãƒˆ 1æ®µç›®ãƒ»å¤–å´ï¼‰
+                // --------------------------------------------------
+            case 71:
+                if (tip == 10) Warp(61, 13.7f, 4.85f); // å·¦ãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸61ã¸æˆ»ã‚‹
+                if (tip == 7)  Warp(101, 3.0f, 2.95f); // ä¸Šãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸101ã¸
+                break;
 
+// --------------------------------------------------
+// ã‚¹ãƒ†ãƒ¼ã‚¸ 90ï¼ˆå·¦ãƒ«ãƒ¼ãƒˆ 2æ®µç›®ãƒ»å¤–å´ï¼‰
+// --------------------------------------------------
 
+            case 90:
+                if (tip == 8)  Warp(60, 9.5f, 1.9f); // ä¸‹ãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸61ã¸æˆ»ã‚‹
+                if (tip == 7)  Warp(90, 3.0f, 2.95f); // ä¸Šãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸101ã¸
+                break;
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 91ï¼ˆå³ãƒ«ãƒ¼ãƒˆ 2æ®µç›®ãƒ»å¤–å´ï¼‰
+                // --------------------------------------------------
+            case 91:
+                if (tip == 8)  Warp(61, 2.5f, 1.8f); // ä¸‹ãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸61ã¸æˆ»ã‚‹
+                if (tip == 7)  Warp(91, 3.0f, 2.95f); // ä¸Šãƒ‰ã‚¢  ã‚¹ãƒ†ãƒ¼ã‚¸101ã¸
+                break;
 
+                // --------------------------------------------------
+                // ã‚¹ãƒ†ãƒ¼ã‚¸ 150ï¼ˆBosså‰ åˆæµåœ°ç‚¹ï¼‰
+                // --------------------------------------------------
+            case 150:
+                if (tip == 8) {
+                    // ä¸‹ãƒ‰ã‚¢  Xåº§æ¨™ã«ã‚ˆã£ã¦ 130 ã‹ 131 ã¸æˆ»ã‚‹
+                    if (m_pos.x < 480) {
+                        Warp(130, 7.5f, 2.0f);
+                    }
+                    else {
+                        Warp(131, 7.5f, 2.0f);
+                    }
+                }
+                if (tip == 7) Warp(999, 7.5f, 6.8f); // ä¸Šãƒ‰ã‚¢  Bossã‚¹ãƒ†ãƒ¼ã‚¸ã¸
+                break;
+            } //  switch (g_currentStage) ã®çµ‚ã‚ã‚Š
 
-
-// ==========================================
-// ƒ{ƒX‘OƒXƒe[ƒW (8:‰ºƒhƒA‚©‚ç–ß‚éê‡‚È‚Ç)
-// ==========================================
-            else if (tip == 8 && g_currentStage == 150) {
-                g_currentStage = 5;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 5 * MAP_TIP_SIZE); // ƒXƒe[ƒW4‚ÌãƒhƒA‘O‚Ö
-                m_pos_old = m_pos;
-            }
-            else if (tip == 8 && g_currentStage == 150) {
-                g_currentStage = 5;
-                m_pos = CVector2D(7.5 * MAP_TIP_SIZE, 5 * MAP_TIP_SIZE); // ƒXƒe[ƒW4‚ÌãƒhƒA‘O‚Ö
-                m_pos_old = m_pos;
-            }
-            // ---  ‚±‚±‚Ü‚Å ---
-
-            // (ˆÈ‰º‚ÍŠù‘¶‚Ì•Ç‰Ÿ‚µ–ß‚µˆ—)
+            //  å£ãƒ»åºŠã®æŠ¼ã—æˆ»ã—åˆ¤å®šï¼ˆãƒ¯ãƒ¼ãƒ—å¾Œã«å®Ÿè¡Œï¼‰
             int t;
-            // X²i‰¡•Çj
+            // Xè»¸ï¼ˆæ¨ªå£ï¼‰
             t = f->CollisionRect(CVector2D(m_pos.x, m_pos_old.y), m_rect);
             if (t != 0) m_pos.x = m_pos_old.x;
 
-            // Y²i°E“Vˆäj
+            // Yè»¸ï¼ˆåºŠãƒ»å¤©äº•ï¼‰
             t = f->CollisionRect(CVector2D(m_pos_old.x, m_pos.y), m_rect);
             if (t != 0) {
                 m_pos.y = m_pos_old.y;
@@ -535,22 +568,13 @@ void Player::Collision(Base* b) {
             }
         }
         break;
-
-
-
-    case eType_Trader:
-        if (Base::CollisionRect(this, b)) 
-        {
-            m_pos = m_pos_old;
-        }
-        break;
     }
 }
 
 
 void Player::TakeDamage(float damage)
 {
-    //HPŒ¸­
+    //HPæ¸›å°‘
     m_hp = max(m_hp - damage, 0);
     if (m_hp <= 0) {
         m_state = eState_Death;
@@ -565,13 +589,13 @@ void Player::TakeDamage(float damage)
 
 void Player::SetPlayerAnimation(int anim)
 {
-    //Œ»İ‚Æ“¯‚¶ƒAƒjƒ[ƒVƒ‡ƒ“‚È‚ç‰½‚à‚µ‚È‚¢
+    //ç¾åœ¨ã¨åŒã˜ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãªã‚‰ä½•ã‚‚ã—ãªã„
     if (m_anim == anim)
         return;
 
     m_anim = anim;
 
-    //ƒAƒjƒ[ƒVƒ‡ƒ“•ÏX
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å¤‰æ›´
     m_img.ChangeAnimation(anim);
 }
 
