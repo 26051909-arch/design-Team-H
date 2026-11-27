@@ -568,6 +568,13 @@ void Player::Collision(Base* b) {
             }
         }
         break;
+
+
+
+    case eType_Trader:
+        if (Base::CollisionRect(this, b)) {
+            m_pos = m_pos_old;;
+        }
     }
 }
 

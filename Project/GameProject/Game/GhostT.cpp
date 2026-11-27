@@ -48,7 +48,7 @@ void GhostT::StateIdle()
 {
 
     //歩きの移動速度
-    const float walk_speed = 5.0f;
+    const float walk_speed = 3.0f;
 
     //移動方向によって速度を変更
     if (m_direction == eDirection_Left)
@@ -61,7 +61,7 @@ void GhostT::StateIdle()
     }
 
     //移動
-    m_pos += m_vec;
+    m_pos.x += m_vec.x;
 
 }
 
@@ -138,7 +138,21 @@ void GhostT::Collision(Base* b)
             int t;
             // X軸（横壁）
             t = f->CollisionRect(CVector2D(m_pos.x, m_pos_old.y), m_rect);
-            if (t != 0) m_pos.x = m_pos_old.x;
+            if (t != 0) {
+
+                //元の位置に戻す
+                m_pos.x = m_pos_old.x;
+
+                //移動方向を反転
+                if (m_direction == eDirection_Right)
+                {
+                    m_direction == eDirection_Left;
+                }
+                else {
+                    m_direction == eDirection_Right;
+                }
+                m_flip = true;
+            }
 
             // Y軸（床・天井）
             t = f->CollisionRect(CVector2D(m_pos_old.x, m_pos.y), m_rect);

@@ -104,7 +104,7 @@ void Init(void)
 
 	
 	new Player(CVector2D(2 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE), Player::eDirection_Ushiro);
-	new GhostT(CVector2D(5 * MAP_TIP_SIZE, 7 * MAP_TIP_SIZE), GhostT::eDirection_Right);
+	new GhostT(CVector2D(5 * MAP_TIP_SIZE, 6 * MAP_TIP_SIZE), GhostT::eDirection_Right);
 
 
 
