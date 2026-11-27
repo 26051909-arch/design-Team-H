@@ -78,7 +78,7 @@ void Trader::Draw()
     m_img.SetPos(m_pos);
     m_img.Draw();
 
-     DrawRect(); // デバッグ用の枠線は非表示
+    // DrawRect(); // デバッグ用の枠線は非表示
 }
 
 // ==========================================

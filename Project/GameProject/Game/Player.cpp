@@ -423,7 +423,7 @@ void Player::Draw()
 
     m_img.Draw();
 
-    DrawRect();
+    //DrawRect();
 }
 
 

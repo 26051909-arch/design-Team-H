@@ -101,6 +101,28 @@ static int mazeData71[MAP_HEIGHT][MAP_WIDTH] = {
     {2,3,3,3,3,3,3,3,3,3,3,3,3,3,2},
 };
 
+static int mazeData80[MAP_HEIGHT][MAP_WIDTH] = {
+    {2,4,4,4,4,4,4,4,4,4,4,4,4,4,2},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,9},
+    {2,3,3,3,3,3,3,3,3,3,3,3,3,3,2},
+};
+
+static int mazeData81[MAP_HEIGHT][MAP_WIDTH] = {
+    {2,4,4,4,4,4,4,4,4,4,4,4,4,4,2},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {10,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
+    {2,3,3,3,3,3,3,3,3,3,3,3,3,3,2},
+};
+
 static int mazeData90[MAP_HEIGHT][MAP_WIDTH] = {
     {2,4,4,4,4,4,4,4,4,4,4,4,4,4,2},
     {5,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
@@ -155,6 +177,9 @@ int GetMapTile(int stage, int row, int col) {
     case 61: return mazeData61[row][col];
     case 70: return mazeData70[row][col];
     case 71: return mazeData71[row][col];
+    case 80: return mazeData80[row][col];
+    case 81: return mazeData81[row][col];
+
     case 90: return mazeData90[row][col];
     case 91: return mazeData91[row][col];
     case 150: return mazeData150[row][col];
