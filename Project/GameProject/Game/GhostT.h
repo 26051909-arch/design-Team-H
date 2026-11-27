@@ -77,6 +77,10 @@ public:
 
 
 	GhostT(const CVector2D& pos, int direction);
+	//Ž‹ŠE‚Ì”»’è
+	bool CheckSight();
+	//Ž‹ŠE‚Ì•`‰æ
+	void DrawSight();
 	void Update();
 	void Draw();
 	void Collision(Base* b);
